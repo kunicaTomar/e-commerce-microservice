@@ -13,7 +13,7 @@ Spin up the entire stack locally via **Docker Compose**—from clone to runtime
 | **Async Workflows**           | Order events published to RabbitMQ; Notification service consumes asynchronously        |
 | **Resilience & Observability**| Resilience4j (timeouts, circuit breakers) · Zipkin (distributed tracing)                |
 | **API Gateway**               | Spring Cloud Gateway handles routing, logging and edge concerns                         |
-| **Service Discovery**         | Eureka registry—no hard‑coded URLs                                                     |
+| **Service Discovery**         | Eureka registry—no hard‑coded URLs                                                      |
 | **Containerization**          | Single `docker-compose.yml` spins up the entire stack                                   |
 
 ---
@@ -25,25 +25,6 @@ Spin up the entire stack locally via **Docker Compose**—from clone to runtime
 - PostgreSQL 15 · MongoDB 7  
 - Resilience4j · Zipkin  
 - Docker / Docker Compose  
-
----
-
-## 🏗️ Architecture Diagram
-Client → API Gateway → ──────>  User‑Service  ─────> PostgreSQL
-                        │        
-                        │        
-                        │
-                        ├──────>  Product‑Service ──> MongoDB  (catalog)
-                        │
-                        ├──────>  Cart‑Service    ──> Redis  (session cart)
-                        │
-                        └──────>  Order‑Service   ──> PostgreSQL (orders)
-                                          │
-                                          ▼
-                                RabbitMQ  Exchange  «order.created»
-                                          │
-                                          ▼
-                                  Notification‑Service  → SMTP / Twilio
 
 ---
 
@@ -85,15 +66,6 @@ open http://localhost:9411                  # Zipkin UI
 | Zipkin UI         | 9411 |
 | PostgreSQL        | 5432 |
 | MongoDB           | 27017 |
-
----
-
-## 📈 Roadmap
-- ✅ Resilience4j circuit breakers  
-- ✅ Zipkin tracing across async hops  
-- ⬜ Kafka drop‑in broker support  
-- ⬜ GitHub Actions CI/CD pipeline  
-- ⬜ React / Next.js front‑end demo  
 
 ---
 
